@@ -6,6 +6,13 @@ type Props = {
   todos: Todo[];
   index: number;
 };
+const idToColumnText: {
+  [key in TypedColumn]: string;
+} = {
+  todo: "To Do",
+  inprogress: "In Progrecces",
+  done: "Done",
+};
 
 function Column({ id, todos, index }: Props) {
   console.log("HAmed", id);
@@ -26,7 +33,12 @@ function Column({ id, todos, index }: Props) {
                   snapshot.isDraggingOver ? "bg-gray-200" : " bg-white/50"
                 }`}
               >
-                <h2>{id}</h2>
+                <h2 className=" flex justify-between font-bold text-xl p-2">
+                  {idToColumnText[id]}
+                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal">
+                    {todos.length}
+                  </span>
+                </h2>
               </div>
             )}
           </Droppable>
